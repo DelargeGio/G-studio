@@ -26,6 +26,15 @@ body {
     overflow-x: hidden;
 }
 
+/* Respeta a quienes prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 .site-wrapper {
     max-width: 1100px;
     margin: 0 auto;
@@ -206,17 +215,31 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--text-muted);
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.6rem;
     margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.section-header-line h2 {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
 }
 
 .text-acid {
     color: var(--acid-green);
     font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+}
+
+.text-muted {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
 }
 
 /* CAPABILITIES GRID */
