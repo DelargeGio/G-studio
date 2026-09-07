@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,7 +7,6 @@
     <title>GRIO STUDIO — Branding, UI/UX, Frontend & Digital Collage</title>
     <meta name="description" content="GRIO STUDIO — Estudio de diseño digital y desarrollo frontend en CDMX. Branding corporativo, interfaces UI/UX, character design y arte surrealista para la música y la cultura.">
 
-    <!-- Open Graph / Meta Social Preview -->
     <meta property="og:title" content="GRIO STUDIO — Branding, UI/UX & Digital Art">
     <meta property="og:description" content="Diseño que impone. Código que vuela. CDMX · Global Standard.">
     <meta property="og:image" content="https://delargegio.github.io/grio-studio/img/G%20STUDIO.png">
@@ -31,6 +31,7 @@
                     <a href="#services">Capacidades</a>
                     <a href="#workflow">Proceso</a>
                     <a href="#projects">Proyectos</a>
+                    <a href="#cotizador">Cotizador</a>
                     <a href="#contact">Contacto</a>
                 </nav>
                 <div class="status-indicator">
@@ -109,9 +110,17 @@
                 <span class="text-muted">2025 — 2026</span>
             </div>
 
+            <!-- Botones de Filtro Ultraligeros -->
+            <div class="project-filters" style="display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                <button class="filter-btn active" onclick="filterProjects('all')" style="background: var(--acid-green, #00ff66); color: #000; border: none; padding: 0.5rem 1rem; font-family: var(--font-mono, monospace); font-size: 0.8rem; cursor: pointer; border-radius: 4px; font-weight: 700;">// Todos</button>
+                <button class="filter-btn" onclick="filterProjects('branding')" style="background: rgba(255,255,255,0.05); color: var(--text-main, #fff); border: 1px solid rgba(255,255,255,0.15); padding: 0.5rem 1rem; font-family: var(--font-mono, monospace); font-size: 0.8rem; cursor: pointer; border-radius: 4px;">Branding & Vector</button>
+                <button class="filter-btn" onclick="filterProjects('frontend')" style="background: rgba(255,255,255,0.05); color: var(--text-main, #fff); border: 1px solid rgba(255,255,255,0.15); padding: 0.5rem 1rem; font-family: var(--font-mono, monospace); font-size: 0.8rem; cursor: pointer; border-radius: 4px;">Frontend & Web</button>
+                <button class="filter-btn" onclick="filterProjects('surreal')" style="background: rgba(255,255,255,0.05); color: var(--text-main, #fff); border: 1px solid rgba(255,255,255,0.15); padding: 0.5rem 1rem; font-family: var(--font-mono, monospace); font-size: 0.8rem; cursor: pointer; border-radius: 4px;">Surrealismo & Art</button>
+            </div>
+
             <div class="projects-list">
                 <!-- Proyecto 1: Tovar & Associates -->
-                <article class="project-row">
+                <article class="project-row" data-category="branding">
                     <div class="project-info">
                         <span class="project-tag">Branding · Sistema Vectorial</span>
                         <h3 class="project-title">Tovar & Associates</h3>
@@ -138,7 +147,7 @@
                 </article>
 
                 <!-- Proyecto 2: Universos Vectoriales & Character Design -->
-                <article class="project-row">
+                <article class="project-row" data-category="branding">
                     <div class="project-info">
                         <span class="project-tag">Ilustración · Character Design · Streetwear</span>
                         <h3 class="project-title">Universos Vectoriales & Personajes</h3>
@@ -166,7 +175,7 @@
                 </article>
 
                 <!-- Proyecto 3: Universos Sonoros & Gráfica Cultural -->
-                <article class="project-row">
+                <article class="project-row" data-category="surreal">
                     <div class="project-info">
                         <span class="project-tag">Cover Art · Cartelería · Sound Systems</span>
                         <h3 class="project-title">Universos Sonoros & Gráfica Cultural</h3>
@@ -198,7 +207,7 @@
                 </article>
 
                 <!-- Proyecto 4: Universos Surrealistas Vol. II -->
-                <article class="project-row">
+                <article class="project-row" data-category="surreal">
                     <div class="project-info">
                         <span class="project-tag">Photoshop · Fotomontaje · Surrealismo</span>
                         <h3 class="project-title">Universos Surrealistas Vol. II</h3>
@@ -225,7 +234,7 @@
                 </article>
 
                 <!-- Proyecto 5: El Norteño Grill & Bar -->
-                <article class="project-row">
+                <article class="project-row" data-category="frontend">
                     <div class="project-info">
                         <span class="project-tag">Gastronomía · Identidad & Web App</span>
                         <h3 class="project-title">El Norteño Grill & Bar</h3>
@@ -243,7 +252,7 @@
                 </article>
 
                 <!-- Proyecto 6: Dra. Daniela Muñoz -->
-                <article class="project-row">
+                <article class="project-row" data-category="frontend">
                     <div class="project-info">
                         <span class="project-tag">Medicina Estética · Web Interface</span>
                         <h3 class="project-title">Dra. Daniela Muñoz</h3>
@@ -262,10 +271,50 @@
             </div>
         </section>
 
-        <!-- 04 // CONTACTO -->
+        <!-- 04 // COTIZADOR INTERACTIVO -->
+        <section class="section-container" id="cotizador">
+            <div class="section-header-line">
+                <h2>04 // Cotizador Interactivo</h2>
+                <span class="text-acid">Estimador de Inversión</span>
+            </div>
+            <div class="contact-box">
+                <div class="contact-text" style="width: 100%;">
+                    <h3>Calcula tu inversión estimada</h3>
+                    <p>Selecciona los requerimientos para tu proyecto digital y obtén una cotización preliminar instantánea.</p>
+                    
+                    <form id="grioCalculator" oninput="result.value = (parseInt(service.value) + parseInt(urgency.value)).toLocaleString('es-MX', {style: 'currency', currency: 'MXN'})" style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1.25rem; text-align: left;">
+                            <label for="service" style="display: block; font-family: var(--font-mono, monospace); font-size: 0.78rem; color: var(--text-muted, #888); margin-bottom: 0.4rem;">Servicio requerido:</label>
+                            <select id="service" name="service" required style="width: 100%; background: rgba(0,0,0,0.3); color: inherit; border: 1px solid rgba(255,255,255,0.15); padding: 0.75rem; border-radius: 4px; font-family: inherit; font-size: 0.9rem; field-sizing: content;">
+                                <option value="4500" style="background: #111; color: #fff;">Landing Page MVP (HTML/CSS/JS) - $4,500 MXN</option>
+                                <option value="9500" style="background: #111; color: #fff;">Sitio Web Corporativo / UI-UX - $9,500 MXN</option>
+                                <option value="14000" style="background: #111; color: #fff;">Web App / Frontend Avanzado - $14,000 MXN</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem; text-align: left;">
+                            <label for="urgency" style="display: block; font-family: var(--font-mono, monospace); font-size: 0.78rem; color: var(--text-muted, #888); margin-bottom: 0.4rem;">Tiempo de entrega:</label>
+                            <select id="urgency" name="urgency" required style="width: 100%; background: rgba(0,0,0,0.3); color: inherit; border: 1px solid rgba(255,255,255,0.15); padding: 0.75rem; border-radius: 4px; font-family: inherit; font-size: 0.9rem; field-sizing: content;">
+                                <option value="0" style="background: #111; color: #fff;">Estándar (2 a 3 semanas)</option>
+                                <option value="2000" style="background: #111; color: #fff;">Exprés (Menos de 7 días) +$2,000 MXN</option>
+                            </select>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem;">
+                            <span style="font-family: var(--font-mono, monospace); font-size: 0.82rem; color: var(--text-muted, #888);">Inversión estimada:</span>
+                            <output name="result" for="service urgency" style="font-family: var(--font-mono, monospace); font-size: 1.25rem; font-weight: 700; color: var(--acid-green, #00ff66);">$4,500.00 MXN</output>
+                        </div>
+
+                        <a id="whatsappOrderBtn" href="https://wa.me/525656691886?text=Hola,%20quiero%20contratar%20el%20servicio%20cotizado%20en%20el%20sitio." target="_blank" rel="noopener noreferrer" class="whatsapp-cta" style="display: inline-block; text-align: center; width: 100%; text-decoration: none; box-sizing: border-box;">Solicitar cotización por WhatsApp &nearr;</a>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 // CONTACTO -->
         <section class="section-container" id="contact">
             <div class="section-header-line">
-                <h2>04 // Contacto</h2>
+                <h2>05 // Contacto</h2>
             </div>
             <div class="contact-box">
                 <div class="contact-text">
@@ -288,7 +337,7 @@
         <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
     </a>
 
-    <!-- Lightbox Modal (uno solo) -->
+    <!-- Lightbox Modal -->
     <div id="lightboxModal" class="lightbox">
         <span class="lightbox-close">&times;</span>
         <img id="lightboxImg" src="" alt="Vista ampliada">

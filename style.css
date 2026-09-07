@@ -556,3 +556,41 @@ body {
 .lightbox-close:hover {
     color: var(--acid-green);
 }
+/* style.css (Añadir estas reglas a tu archivo de estilos para los filtros y transiciones) */
+
+/* Transiciones nativas y fluidas para Lightbox */
+.lightbox {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox img {
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox.active img {
+    transform: scale(1);
+}
+
+/* Animación y ocultamiento para el filtro de proyectos */
+.project-row {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.project-row.hidden {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* Propiedad nativa Baseline 2026 para inputs dinámicos */
+input, textarea, select {
+    field-sizing: content;
+}

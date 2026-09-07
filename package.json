@@ -1,0 +1,24 @@
+{
+  "name": "grio-studio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delargegio/grio-studio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/delargegio/grio-studio/issues"
+  },
+  "homepage": "https://github.com/delargegio/grio-studio#readme",
+  "devDependencies": {
+    "tailwindcss": "^4.3.3"
+  }
+}
