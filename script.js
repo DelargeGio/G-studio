@@ -5,30 +5,68 @@ document.addEventListener("DOMContentLoaded", () => {
         setTheme(savedTheme, false);
     }
 
-    // --- LIGHTBOX DINÁMICO ---
+    // --- LIGHTBOX DINÁMICO CON GALERÍA (PREV / NEXT) ---
     const modal = document.getElementById("lightboxModal");
     const modalImg = document.getElementById("lightboxImg");
     const closeBtn = document.querySelector(".lightbox-close");
+    const prevBtn = document.getElementById("lightboxPrev");
+    const nextBtn = document.getElementById("lightboxNext");
 
-    document.querySelectorAll(".media-preview img").forEach(img => {
-        img.addEventListener("click", (e) => {
-            if (modal && modalImg) {
-                modal.style.display = "flex";
-                modalImg.src = e.target.src;
+    const images = Array.from(document.querySelectorAll(".media-preview img"));
+    let currentIndex = 0;
+
+    function updateLightboxImage(index) {
+        if (images.length > 0 && modalImg) {
+            currentIndex = (index + images.length) % images.length;
+            modalImg.src = images[currentIndex].src;
+        }
+    }
+
+    images.forEach((img, index) => {
+        img.addEventListener("click", () => {
+            if (modal) {
+                modal.classList.add("active");
+                updateLightboxImage(index);
             }
         });
     });
 
     if (closeBtn && modal) {
         closeBtn.addEventListener("click", () => {
-            modal.style.display = "none";
+            modal.classList.remove("active");
         });
         modal.addEventListener("click", (e) => {
             if (e.target === modal) {
-                modal.style.display = "none";
+                modal.classList.remove("active");
             }
         });
     }
+
+    if (prevBtn) {
+        prevBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            updateLightboxImage(currentIndex - 1);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            updateLightboxImage(currentIndex + 1);
+        });
+    }
+
+    // Navegación con teclado (Escape, Flecha izquierda, Flecha derecha)
+    document.addEventListener("keydown", (e) => {
+        if (!modal || !modal.classList.contains("active")) return;
+        if (e.key === "Escape") {
+            modal.classList.remove("active");
+        } else if (e.key === "ArrowLeft") {
+            updateLightboxImage(currentIndex - 1);
+        } else if (e.key === "ArrowRight") {
+            updateLightboxImage(currentIndex + 1);
+        }
+    });
 
     // --- REPRODUCTOR DE AUDIO ---
     const audio = document.getElementById("bgAudio");

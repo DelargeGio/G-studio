@@ -594,3 +594,50 @@ body {
 input, textarea, select {
     field-sizing: content;
 }bv
+/* Botones de navegación del Lightbox */
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    z-index: 10000;
+}
+
+.lightbox-nav:hover {
+    background: var(--bg-card);
+    border-color: var(--acid-green);
+    color: var(--acid-green);
+}
+
+.lightbox-nav.prev {
+    left: 2rem;
+}
+
+.lightbox-nav.next {
+    right: 2rem;
+}
+
+@media (max-width: 768px) {
+    .lightbox-nav {
+        font-size: 1.5rem;
+        padding: 0.3rem 0.7rem;
+    }
+    .lightbox-nav.prev {
+        left: 1rem;
+    }
+    .lightbox-nav.next {
+        right: 1rem;
+    }
+    .lightbox-close {
+        top: 1rem;
+        right: 1.5rem;
+        font-size: 2.2rem;
+    }
+}
